@@ -1,2 +1,2 @@
 # ProyectoSEPA
-Cçodigos del proyecto
+Codigos del proyecto
