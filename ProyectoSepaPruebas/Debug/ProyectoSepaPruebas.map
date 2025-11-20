@@ -1,0 +1,609 @@
+******************************************************************************
+                  TI ARM Linker PC v20.2.7                     
+******************************************************************************
+>> Linked Thu Nov 20 20:50:50 2025
+
+OUTPUT FILE NAME:   <ProyectoSepaPruebas.out>
+ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 0002048d
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00100000  0002074e  000df8b2  R  X
+  SRAM                  20000000   00040000  000022b4  0003dd4c  RW X
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00020750   00020750    r-x
+  00000000    00000000    00000208   00000208    r-- .intvecs
+  00000208    00000208    0001db88   0001db88    r-- .const
+  0001dd90    0001dd90    0000297e   0000297e    r-x .text
+  00020710    00020710    00000040   00000040    r-- .cinit
+20000000    20000000    000022b8   00000000    rw-
+  20000000    20000000    0000026c   00000000    rw- .vtable
+  20000270    20000270    00002000   00000000    rw- .stack
+  20002270    20002270    00000024   00000000    rw- .bss
+  20002294    20002294    00000024   00000000    rw- .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    00000208     
+                  00000000    00000208     tm4c1294ncpdt_startup_ccs.obj (.intvecs)
+
+.const     0    00000208    0001db88     
+                  00000208    00003f48     mandolib.obj (.const:.string:antena3_rgb565_data)
+                  00004150    00003f48     mandolib.obj (.const:.string:cuatro_rgb565_data)
+                  00008098    00003f48     mandolib.obj (.const:.string:la2_rgb565_data)
+                  0000bfe0    00003f48     mandolib.obj (.const:.string:lasexta_rgb565_data)
+                  0000ff28    00003f48     mandolib.obj (.const:.string:telecinco_rgb565_data)
+                  00013e70    00003f48     mandolib.obj (.const:.string:tve_rgb565_data)
+                  00017db8    000016c8     mandolib.obj (.const:.string:bajar_rgb565_data)
+                  00019480    000016c8     mandolib.obj (.const:.string:encender_rgb565_data)
+                  0001ab48    000016c8     mandolib.obj (.const:.string:quitar_rgb565_data)
+                  0001c210    000016c8     mandolib.obj (.const:.string:subir_rgb565_data)
+                  0001d8d8    000001b0     driverlib.lib : sysctl.obj (.const:g_pppui32XTALtoVCO)
+                  0001da88    00000090                   : gpio.obj (.const:g_pui32GPIOBaseAddrs)
+                  0001db18    0000008a     signals.obj (.const:ir_signal)
+                  0001dba2    00000002     --HOLE-- [fill = 0]
+                  0001dba4    0000006c     driverlib.lib : sysctl.obj (.const:g_pui32Xtals)
+                  0001dc10    00000060                   : timer.obj (.const:g_ppui32TimerIntMap)
+                  0001dc70    00000040                   : timer.obj (.const:g_ppui32TimerIntMapSnowflake)
+                  0001dcb0    00000030                   : sysctl.obj (.const:g_sXTALtoMEMTIM)
+                  0001dce0    00000018     ProyectoCompleto.obj (.const:REG_CAL)
+                  0001dcf8    00000014     mandolib.obj (.const:$P$T3$4)
+                  0001dd0c    00000014     mandolib.obj (.const:$P$T4$5)
+                  0001dd20    00000014     driverlib.lib : interrupt.obj (.const:g_pui32EnRegs)
+                  0001dd34    00000012     uartstdio.obj (.const:.string)
+                  0001dd46    00000002     --HOLE-- [fill = 0]
+                  0001dd48    00000010     signals.obj (.const:SIGNAL_MANDO_0)
+                  0001dd58    0000000c     uartstdio.obj (.const:g_ui32UARTBase)
+                  0001dd64    0000000c     uartstdio.obj (.const:g_ui32UARTPeriph)
+                  0001dd70    00000008     signals.obj (.const:.string)
+                  0001dd78    00000008     driverlib.lib : sysctl.obj (.const:g_pui32VCOFrequencies)
+                  0001dd80    00000004     mandolib.obj (.const:$P$T0$1)
+                  0001dd84    00000004     mandolib.obj (.const:$P$T1$2)
+                  0001dd88    00000004     mandolib.obj (.const:$P$T2$3)
+                  0001dd8c    00000004     uartstdio.obj (.const)
+
+.text      0    0001dd90    0000297e     
+                  0001dd90    000011d8     ft800_TIVA.obj (.text)
+                  0001ef68    00000508     ProyectoCompleto.obj (.text)
+                  0001f470    000004a8     uartstdio.obj (.text)
+                  0001f918    00000380     mandolib.obj (.text)
+                  0001fc98    00000200     driverlib.lib : sysctl.obj (.text:SysCtlClockFreqSet)
+                  0001fe98    0000016c                   : gpio.obj (.text:GPIOPadConfigSet)
+                  00020004    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.asm.obj (.text)
+                  000200a0    00000068     driverlib.lib : interrupt.obj (.text:IntEnable)
+                  00020108    00000068     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00020170    00000060     driverlib.lib : timer.obj (.text:TimerConfigure)
+                  000201d0    0000004c                   : gpio.obj (.text:GPIOPinConfigure)
+                  0002021c    0000004c                   : timer.obj (.text:_TimerIntNumberGet)
+                  00020268    00000048                   : sysctl.obj (.text:_SysCtlFrequencyGet)
+                  000202b0    00000046                   : uart.obj (.text:UARTConfigSetExpClk)
+                  000202f6    00000002     rtsv7M4_T_le_v4SPD16_eabi.lib : div0.asm.obj (.text)
+                  000202f8    00000044                                   : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit:__TI_auto_init_nobinit_nopinit)
+                  0002033c    00000040                                   : u_divt2.asm.obj (.text)
+                  0002037c    0000003c     driverlib.lib : ssi.obj (.text:SSIConfigSetExpClk)
+                  000203b8    00000038                   : sysctl.obj (.text:SysCtlPeripheralPresent)
+                  000203f0    00000034                   : interrupt.obj (.text:IntRegister)
+                  00020424    00000034                   : sysctl.obj (.text:SysCtlPeripheralEnable)
+                  00020458    00000034                   : sysctl.obj (.text:SysCtlPeripheralSleepEnable)
+                  0002048c    00000034     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.text:_c_int00_noargs:_c_int00_noargs)
+                  000204c0    0000002c     driverlib.lib : gpio.obj (.text:GPIODirModeSet)
+                  000204ec    00000022                   : pwm.obj (.text:PWMGenConfigure)
+                  0002050e    00000002     --HOLE-- [fill = 0]
+                  00020510    00000020                   : uart.obj (.text:UARTDisable)
+                  00020530    00000020                   : sysctl.obj (.text:_SysCtlMemTimingGet)
+                  00020550    0000001e                   : pwm.obj (.text:PWMPulseWidthSet)
+                  0002056e    0000001c     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  0002058a    0000001a     driverlib.lib : gpio.obj (.text:GPIOPinTypeGPIOOutput)
+                  000205a4    00000018                   : timer.obj (.text:TimerIntRegister)
+                  000205bc    00000016                   : gpio.obj (.text:GPIOPinTypePWM)
+                  000205d2    00000016                   : gpio.obj (.text:GPIOPinTypeSSI)
+                  000205e8    00000016                   : gpio.obj (.text:GPIOPinTypeUART)
+                  000205fe    00000002     --HOLE-- [fill = 0]
+                  00020600    00000014                   : pwm.obj (.text:PWMClockSet)
+                  00020614    00000014                   : uart.obj (.text:UARTEnable)
+                  00020628    00000012                   : pwm.obj (.text:PWMOutputState)
+                  0002063a    00000012                   : timer.obj (.text:TimerLoadSet)
+                  0002064c    00000010                   : interrupt.obj (.text:IntMasterEnable)
+                  0002065c    00000010                   : pwm.obj (.text:PWMGenPeriodSet)
+                  0002066c    0000000e                   : timer.obj (.text:TimerEnable)
+                  0002067a    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00020688    0000000c     driverlib.lib : cpu.obj (.text:CPUcpsie)
+                  00020694    0000000c                   : pwm.obj (.text:PWMGenEnable)
+                  000206a0    0000000c                   : ssi.obj (.text:SSIDataGet)
+                  000206ac    0000000c     tm4c1294ncpdt_startup_ccs.obj (.text)
+                  000206b8    0000000a     driverlib.lib : ssi.obj (.text:SSIDataPut)
+                  000206c2    0000000a                   : ssi.obj (.text:SSIEnable)
+                  000206cc    0000000a                   : uart.obj (.text:UARTCharGet)
+                  000206d6    0000000a                   : uart.obj (.text:UARTCharPut)
+                  000206e0    00000008                   : ssi.obj (.text:SSIBusy)
+                  000206e8    00000008                   : timer.obj (.text:TimerIntEnable)
+                  000206f0    00000006                   : gpio.obj (.text:GPIOPinWrite)
+                  000206f6    00000006                   : sysctl.obj (.text:SysCtlDelay)
+                  000206fc    00000006                   : timer.obj (.text:TimerClockSourceSet)
+                  00020702    00000004                   : timer.obj (.text:TimerIntClear)
+                  00020706    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : pre_init.c.obj (.text:_system_pre_init)
+                  0002070a    00000004                                   : exit.c.obj (.text:abort:abort)
+
+.cinit     0    00020710    00000040     
+                  00020710    0000000c     (.cinit..data.load) [load image, compression = lzss]
+                  0002071c    0000000c     (__TI_handler_table)
+                  00020728    00000008     (.cinit..bss.load) [load image, compression = zero_init]
+                  00020730    00000008     (.cinit..vtable.load) [load image, compression = zero_init]
+                  00020738    00000018     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.vtable    0    20000000    0000026c     UNINITIALIZED
+                  20000000    0000026c     driverlib.lib : interrupt.obj (.vtable)
+
+.bss       0    20002270    00000024     UNINITIALIZED
+                  20002270    00000004     (.common:BufferXY)
+                  20002274    00000004     (.common:CS_PIN)
+                  20002278    00000004     (.common:CS_PORT)
+                  2000227c    00000004     (.common:PD_PIN)
+                  20002280    00000004     (.common:PD_PORT)
+                  20002284    00000004     (.common:POSX)
+                  20002288    00000004     (.common:POSY)
+                  2000228c    00000004     (.common:RELOJ)
+                  20002290    00000004     (.common:SSI_BASE)
+
+.data      0    20002294    00000024     UNINITIALIZED
+                  20002294    00000018     ft800_TIVA.obj (.data)
+                  200022ac    00000005     uartstdio.obj (.data)
+                  200022b1    00000003     --HOLE--
+                  200022b4    00000004     ProyectoCompleto.obj (.data)
+
+.stack     0    20000270    00002000     UNINITIALIZED
+                  20000270    00000004     rtsv7M4_T_le_v4SPD16_eabi.lib : boot_cortex_m.c.obj (.stack)
+                  20000274    00001ffc     --HOLE--
+
+__llvm_prf_cnts 
+*          0    20000000    00000000     UNINITIALIZED
+
+MODULE SUMMARY
+
+       Module                          code    ro data   rw data
+       ------                          ----    -------   -------
+    .\
+       mandolib.obj                    896     120580    0      
+       ft800_TIVA.obj                  4568    0         56     
+       ProyectoCompleto.obj            1288    24        8      
+       uartstdio.obj                   1192    46        5      
+       tm4c1294ncpdt_startup_ccs.obj   12      520       0      
+       signals.obj                     0       162       0      
+    +--+-------------------------------+-------+---------+---------+
+       Total:                          7956    121332    69     
+                                                                
+    C:/ti/TivaWare_C_Series-2.2.0.295/driverlib/ccs/Debug/driverlib.lib
+       sysctl.obj                      782     596       0      
+       interrupt.obj                   172     20        620    
+       gpio.obj                        582     144       0      
+       timer.obj                       246     160       0      
+       uart.obj                        142     0         0      
+       pwm.obj                         130     0         0      
+       ssi.obj                         100     0         0      
+       cpu.obj                         12      0         0      
+    +--+-------------------------------+-------+---------+---------+
+       Total:                          2166    920       620    
+                                                                
+    C:\ti\ccs1281\ccs\tools\compiler\ti-cgt-arm_20.2.7.LTS\lib\rtsv7M4_T_le_v4SPD16_eabi.lib
+       memcpy_t2.asm.obj               156     0         0      
+       copy_decompress_lzss.c.obj      104     0         0      
+       autoinit.c.obj                  68      0         0      
+       u_divt2.asm.obj                 64      0         0      
+       boot_cortex_m.c.obj             52      0         0      
+       copy_zero_init.c.obj            28      0         0      
+       copy_decompress_none.c.obj      14      0         0      
+       exit.c.obj                      4       0         0      
+       pre_init.c.obj                  4       0         0      
+       div0.asm.obj                    2       0         0      
+    +--+-------------------------------+-------+---------+---------+
+       Total:                          496     0         0      
+                                                                
+       Stack:                          0       0         8192   
+       Linker Generated:               0       64        0      
+    +--+-------------------------------+-------+---------+---------+
+       Grand Total:                    10618   122316    8881   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00020738 records: 3, size/record: 8, table size: 24
+	.data: load addr=00020710, load size=0000000c bytes, run addr=20002294, run size=00000024 bytes, compression=lzss
+	.bss: load addr=00020728, load size=00000008 bytes, run addr=20002270, run size=00000024 bytes, compression=zero_init
+	.vtable: load addr=00020730, load size=00000008 bytes, run addr=20000000, run size=0000026c bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 0002071c records: 3, size/record: 4, table size: 12
+	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_lzss
+	index: 2, handler: __TI_decompress_none
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                          
+-------   ----                          
+0001eb35  Boton                         
+20002270  BufferXY                      
+0002070b  C$$EXIT                       
+200022a8  CMD_Offset                    
+00020689  CPUcpsie                      
+20002274  CS_PIN                        
+20002278  CS_PORT                       
+0001ed5b  Calibra_touch                 
+0001ea81  ComBgcolor                    
+0001eac9  ComButton                     
+0001ec9f  ComCirculo                    
+0001e665  ComColor                      
+0001e9f9  ComDial                       
+0001e46f  ComEsperaFin                  
+0001ea43  ComFgcolor                    
+0001edc7  ComGradient                   
+0001ebc9  ComLine                       
+0001ecff  ComLineWidth                  
+0001e725  ComNum                        
+0001ed11  ComPointSize                  
+0001e9af  ComProgressbar                
+0001ec05  ComRect                       
+0001e91b  ComScrollbar                  
+0001e965  ComSlider                     
+0001e6bd  ComTXT                        
+0001e77d  ComTeclas                     
+0001e605  ComVertex2ff                  
+0001ed23  Com_Punto                     
+0001df2f  Delay                         
+0001e82d  Dibuja                        
+0001e7e1  Ejecuta_Lista                 
+0001e8ff  Esc_Reg                       
+0001e579  EscribeRam16                  
+0001e54b  EscribeRam32                  
+0001e5a7  EscribeRam8                   
+0001e5d9  EscribeRamTxt                 
+0001ecdb  Espera_pant                   
+0001e23f  FT800_IncCMDOffset            
+0001f94d  FT800_LoadAndInflateImage     
+0001e1b9  FT800_SPI_HostCommand         
+0001e203  FT800_SPI_HostCommandDummyRead
+0001e0e9  FT800_SPI_Read32              
+0001e18d  FT800_SPI_Read8               
+0001df8f  FT800_SPI_SendAddressRD       
+0001df39  FT800_SPI_SendAddressWR       
+0001e049  FT800_SPI_Write16             
+0001dff3  FT800_SPI_Write32             
+0001e07b  FT800_SPI_Write8              
+0001f993  FT800_ShowBitmapSimple        
+0001eec9  Fadein                        
+0001ee85  Fadeout                       
+0001ee59  FinNota                       
+200022b4  Flag_ints                     
+000204c1  GPIODirModeSet                
+0001fe99  GPIOPadConfigSet              
+000201d1  GPIOPinConfigure              
+0002058b  GPIOPinTypeGPIOOutput         
+000205bd  GPIOPinTypePWM                
+000205d3  GPIOPinTypeSSI                
+000205e9  GPIOPinTypeUART               
+000206f1  GPIOPinWrite                  
+0001dd91  HAL_Init_SPI                  
+0001def5  HAL_SPI_CSHigh                
+0001dee3  HAL_SPI_CSLow                 
+0001df1b  HAL_SPI_PDhigh                
+0001df09  HAL_SPI_PDlow                 
+0001dea7  HAL_SPI_ReadWrite             
+0001e271  Inicia_pantalla               
+000200a1  IntEnable                     
+0002064d  IntMasterEnable               
+000203f1  IntRegister                   
+0001f31f  IntTimer0                     
+0001fa95  InterfazMando                 
+0001e8c3  Lee_Reg                       
+0001e8df  Lee_Reg8                      
+0001e88f  Lee_pantalla                  
+0001e843  Nueva_pantalla                
+2000227c  PD_PIN                        
+20002280  PD_PORT                       
+20002284  POSX                          
+20002288  POSY                          
+200022a4  POSYANT                       
+00020601  PWMClockSet                   
+000204ed  PWMGenConfigure               
+00020695  PWMGenEnable                  
+0002065d  PWMGenPeriodSet               
+0001e513  PWMOnOff                      
+00020629  PWMOutputState                
+00020551  PWMPulseWidthSet              
+0001e7fb  PadFIFO                       
+0001e4b3  PantOnOff                     
+0001dce0  REG_CAL                       
+2000228c  RELOJ                         
+000206ad  ResetISR                      
+0001dd48  SIGNAL_MANDO_0                
+000206e1  SSIBusy                       
+0002037d  SSIConfigSetExpClk            
+000206a1  SSIDataGet                    
+000206b9  SSIDataPut                    
+000206c3  SSIEnable                     
+20002290  SSI_BASE                      
+0001fc99  SysCtlClockFreqSet            
+000206f7  SysCtlDelay                   
+00020425  SysCtlPeripheralEnable        
+000203b9  SysCtlPeripheralPresent       
+00020459  SysCtlPeripheralSleepEnable   
+0001f309  SysCtlSleepFake               
+000206fd  TimerClockSourceSet           
+00020171  TimerConfigure                
+0002066d  TimerEnable                   
+00020703  TimerIntClear                 
+000206e9  TimerIntEnable                
+000205a5  TimerIntRegister              
+0002063b  TimerLoadSet                  
+0001ee23  TocaNota                      
+000206cd  UARTCharGet                   
+000206d7  UARTCharPut                   
+000202b1  UARTConfigSetExpClk           
+00020511  UARTDisable                   
+00020615  UARTEnable                    
+0001f471  UARTStdioConfig               
+0001f5c1  UARTgetc                      
+0001f507  UARTgets                      
+0001f8e3  UARTprintf                    
+0001f5e9  UARTvprintf                   
+0001f4b7  UARTwrite                     
+0001ee05  VolNota                       
+20002270  __STACK_END                   
+00002000  __STACK_SIZE                  
+20000470  __STACK_TOP                   
+00020738  __TI_CINIT_Base               
+00020750  __TI_CINIT_Limit              
+0002071c  __TI_Handler_Table_Base       
+00020728  __TI_Handler_Table_Limit      
+000202f9  __TI_auto_init_nobinit_nopinit
+00020109  __TI_decompress_lzss          
+0002067b  __TI_decompress_none          
+ffffffff  __TI_pprof_out_hndl           
+ffffffff  __TI_prof_data_size           
+ffffffff  __TI_prof_data_start          
+00000000  __TI_static_base__            
+0002056f  __TI_zero_init_nomemset       
+000202f7  __aeabi_idiv0                 
+000202f7  __aeabi_ldiv0                 
+00020005  __aeabi_memcpy                
+00020005  __aeabi_memcpy4               
+00020005  __aeabi_memcpy8               
+0002033d  __aeabi_uidiv                 
+0002033d  __aeabi_uidivmod              
+ffffffff  __binit__                     
+ffffffff  __c_args__                    
+UNDEFED   __mpu_init                    
+20000270  __stack                       
+20000000  __start___llvm_prf_cnts       
+20000000  __stop___llvm_prf_cnts        
+0002048d  _c_int00_noargs               
+UNDEFED   _system_post_cinit            
+00020707  _system_pre_init              
+0002070b  abort                         
+00000208  antena3_rgb565_data           
+00017db8  bajar_rgb565_data             
+ffffffff  binit                         
+20002294  chipid                        
+20002298  cmdBufferRd                   
+2000229c  cmdBufferWr                   
+00004150  cuatro_rgb565_data            
+00019480  encender_rgb565_data          
+20000000  g_pfnRAMVectors               
+00000000  g_pfnVectors                  
+0001fbe9  ir_send_raw                   
+0001db18  ir_signal                     
+00008098  la2_rgb565_data               
+0000bfe0  lasexta_rgb565_data           
+0001ef69  main                          
+00020005  memcpy                        
+0001ab48  quitar_rgb565_data            
+0001c210  subir_rgb565_data             
+200022a0  t                             
+0000ff28  telecinco_rgb565_data         
+00013e70  tve_rgb565_data               
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                          
+-------   ----                          
+00000000  __TI_static_base__            
+00000000  g_pfnVectors                  
+00000208  antena3_rgb565_data           
+00002000  __STACK_SIZE                  
+00004150  cuatro_rgb565_data            
+00008098  la2_rgb565_data               
+0000bfe0  lasexta_rgb565_data           
+0000ff28  telecinco_rgb565_data         
+00013e70  tve_rgb565_data               
+00017db8  bajar_rgb565_data             
+00019480  encender_rgb565_data          
+0001ab48  quitar_rgb565_data            
+0001c210  subir_rgb565_data             
+0001db18  ir_signal                     
+0001dce0  REG_CAL                       
+0001dd48  SIGNAL_MANDO_0                
+0001dd91  HAL_Init_SPI                  
+0001dea7  HAL_SPI_ReadWrite             
+0001dee3  HAL_SPI_CSLow                 
+0001def5  HAL_SPI_CSHigh                
+0001df09  HAL_SPI_PDlow                 
+0001df1b  HAL_SPI_PDhigh                
+0001df2f  Delay                         
+0001df39  FT800_SPI_SendAddressWR       
+0001df8f  FT800_SPI_SendAddressRD       
+0001dff3  FT800_SPI_Write32             
+0001e049  FT800_SPI_Write16             
+0001e07b  FT800_SPI_Write8              
+0001e0e9  FT800_SPI_Read32              
+0001e18d  FT800_SPI_Read8               
+0001e1b9  FT800_SPI_HostCommand         
+0001e203  FT800_SPI_HostCommandDummyRead
+0001e23f  FT800_IncCMDOffset            
+0001e271  Inicia_pantalla               
+0001e46f  ComEsperaFin                  
+0001e4b3  PantOnOff                     
+0001e513  PWMOnOff                      
+0001e54b  EscribeRam32                  
+0001e579  EscribeRam16                  
+0001e5a7  EscribeRam8                   
+0001e5d9  EscribeRamTxt                 
+0001e605  ComVertex2ff                  
+0001e665  ComColor                      
+0001e6bd  ComTXT                        
+0001e725  ComNum                        
+0001e77d  ComTeclas                     
+0001e7e1  Ejecuta_Lista                 
+0001e7fb  PadFIFO                       
+0001e82d  Dibuja                        
+0001e843  Nueva_pantalla                
+0001e88f  Lee_pantalla                  
+0001e8c3  Lee_Reg                       
+0001e8df  Lee_Reg8                      
+0001e8ff  Esc_Reg                       
+0001e91b  ComScrollbar                  
+0001e965  ComSlider                     
+0001e9af  ComProgressbar                
+0001e9f9  ComDial                       
+0001ea43  ComFgcolor                    
+0001ea81  ComBgcolor                    
+0001eac9  ComButton                     
+0001eb35  Boton                         
+0001ebc9  ComLine                       
+0001ec05  ComRect                       
+0001ec9f  ComCirculo                    
+0001ecdb  Espera_pant                   
+0001ecff  ComLineWidth                  
+0001ed11  ComPointSize                  
+0001ed23  Com_Punto                     
+0001ed5b  Calibra_touch                 
+0001edc7  ComGradient                   
+0001ee05  VolNota                       
+0001ee23  TocaNota                      
+0001ee59  FinNota                       
+0001ee85  Fadeout                       
+0001eec9  Fadein                        
+0001ef69  main                          
+0001f309  SysCtlSleepFake               
+0001f31f  IntTimer0                     
+0001f471  UARTStdioConfig               
+0001f4b7  UARTwrite                     
+0001f507  UARTgets                      
+0001f5c1  UARTgetc                      
+0001f5e9  UARTvprintf                   
+0001f8e3  UARTprintf                    
+0001f94d  FT800_LoadAndInflateImage     
+0001f993  FT800_ShowBitmapSimple        
+0001fa95  InterfazMando                 
+0001fbe9  ir_send_raw                   
+0001fc99  SysCtlClockFreqSet            
+0001fe99  GPIOPadConfigSet              
+00020005  __aeabi_memcpy                
+00020005  __aeabi_memcpy4               
+00020005  __aeabi_memcpy8               
+00020005  memcpy                        
+000200a1  IntEnable                     
+00020109  __TI_decompress_lzss          
+00020171  TimerConfigure                
+000201d1  GPIOPinConfigure              
+000202b1  UARTConfigSetExpClk           
+000202f7  __aeabi_idiv0                 
+000202f7  __aeabi_ldiv0                 
+000202f9  __TI_auto_init_nobinit_nopinit
+0002033d  __aeabi_uidiv                 
+0002033d  __aeabi_uidivmod              
+0002037d  SSIConfigSetExpClk            
+000203b9  SysCtlPeripheralPresent       
+000203f1  IntRegister                   
+00020425  SysCtlPeripheralEnable        
+00020459  SysCtlPeripheralSleepEnable   
+0002048d  _c_int00_noargs               
+000204c1  GPIODirModeSet                
+000204ed  PWMGenConfigure               
+00020511  UARTDisable                   
+00020551  PWMPulseWidthSet              
+0002056f  __TI_zero_init_nomemset       
+0002058b  GPIOPinTypeGPIOOutput         
+000205a5  TimerIntRegister              
+000205bd  GPIOPinTypePWM                
+000205d3  GPIOPinTypeSSI                
+000205e9  GPIOPinTypeUART               
+00020601  PWMClockSet                   
+00020615  UARTEnable                    
+00020629  PWMOutputState                
+0002063b  TimerLoadSet                  
+0002064d  IntMasterEnable               
+0002065d  PWMGenPeriodSet               
+0002066d  TimerEnable                   
+0002067b  __TI_decompress_none          
+00020689  CPUcpsie                      
+00020695  PWMGenEnable                  
+000206a1  SSIDataGet                    
+000206ad  ResetISR                      
+000206b9  SSIDataPut                    
+000206c3  SSIEnable                     
+000206cd  UARTCharGet                   
+000206d7  UARTCharPut                   
+000206e1  SSIBusy                       
+000206e9  TimerIntEnable                
+000206f1  GPIOPinWrite                  
+000206f7  SysCtlDelay                   
+000206fd  TimerClockSourceSet           
+00020703  TimerIntClear                 
+00020707  _system_pre_init              
+0002070b  C$$EXIT                       
+0002070b  abort                         
+0002071c  __TI_Handler_Table_Base       
+00020728  __TI_Handler_Table_Limit      
+00020738  __TI_CINIT_Base               
+00020750  __TI_CINIT_Limit              
+20000000  __start___llvm_prf_cnts       
+20000000  __stop___llvm_prf_cnts        
+20000000  g_pfnRAMVectors               
+20000270  __stack                       
+20000470  __STACK_TOP                   
+20002270  BufferXY                      
+20002270  __STACK_END                   
+20002274  CS_PIN                        
+20002278  CS_PORT                       
+2000227c  PD_PIN                        
+20002280  PD_PORT                       
+20002284  POSX                          
+20002288  POSY                          
+2000228c  RELOJ                         
+20002290  SSI_BASE                      
+20002294  chipid                        
+20002298  cmdBufferRd                   
+2000229c  cmdBufferWr                   
+200022a0  t                             
+200022a4  POSYANT                       
+200022a8  CMD_Offset                    
+200022b4  Flag_ints                     
+ffffffff  __TI_pprof_out_hndl           
+ffffffff  __TI_prof_data_size           
+ffffffff  __TI_prof_data_start          
+ffffffff  __binit__                     
+ffffffff  __c_args__                    
+ffffffff  binit                         
+UNDEFED   __mpu_init                    
+UNDEFED   _system_post_cinit            
+
+[180 symbols]
