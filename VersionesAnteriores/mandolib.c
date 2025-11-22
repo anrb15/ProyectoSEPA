@@ -27,34 +27,20 @@
 #include "MANDOLIB.h"
 
 
+
+// Funcion para cargar imagenes en la memoria
 void FT800_LoadAndInflateImage(const uint8_t *data, size_t imgSize, uint32_t destAddr)
 {
     ComEsperaFin();
     HAL_SPI_CSLow();
 
     FT800_SPI_SendAddressWR(destAddr);
-
-    // Procesar en bloques de 2 bytes porque es RGB565
     size_t i;
-    for (i = 0; i < imgSize; i += 2)
-    {
-        // Leer el pixel como 16 bits
-        uint16_t pixel = data[i] | (data[i + 1] << 8);
-
-        // Convertir RGB565 -> BGR565
-        uint16_t converted =
-            ((pixel & 0xF800) >> 11) |     // R -> B
-            ( pixel & 0x07E0 )        |    // G igual
-            ((pixel & 0x001F) << 11);     // B -> R
-
-        // Enviar pixel convertido, LSB primero (formato del FT800)
-        HAL_SPI_ReadWrite(converted & 0xFF);
-        HAL_SPI_ReadWrite(converted >> 8);
-    }
+    for (i = 0; i < imgSize; i++)
+        HAL_SPI_ReadWrite(data[i]);
 
     HAL_SPI_CSHigh();
 }
-
 
 // Funcion para mostrar imagenes
 void FT800_ShowBitmapSimple( const uint32_t addrs[],const uint16_t widths[],const uint16_t heights[],
