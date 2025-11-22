@@ -19,6 +19,16 @@ typedef struct {
 
 // Declaraciones de señales disponibles
 extern const IRSignal SIGNAL_MANDO_0;
+extern const IRSignal SIGNAL_MANDO_POWER;
+extern const IRSignal SIGNAL_MANDO_VOLUP;
+extern const IRSignal SIGNAL_MANDO_VOLDOWN;
+extern const IRSignal SIGNAL_MANDO_MUTE;
+extern const IRSignal SIGNAL_MANDO_LA1;
+extern const IRSignal SIGNAL_MANDO_LA2;
+extern const IRSignal SIGNAL_MANDO_ANTENA3;
+extern const IRSignal SIGNAL_MANDO_LA4;
+extern const IRSignal SIGNAL_MANDO_TELECINCO;
+extern const IRSignal SIGNAL_MANDO_LASEXTA;
 
 // Tabla para recorrer todas las señales (A FUTURO BORRAR SI NO SE USA)
 //extern const IRSignal * const ALL_SIGNALS[];
