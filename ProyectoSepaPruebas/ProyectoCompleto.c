@@ -109,29 +109,57 @@ int main(void)
         SLEEP;
         //InterfazMando();
         Lee_pantalla();
-        if(POSX>=20 && POSX<=74 && POSY>=10 && POSY<=64)
+        if (POSX >= 20 && POSX <= 74 && POSY >= 10 && POSY <= 64)
         {
             UARTprintf("Has pulsado el boton de encender/apagar\n\n");
-            ir_send_raw(SIGNAL_MANDO_0.data,SIGNAL_MANDO_0.length,RELOJ);
+            ir_send_raw(SIGNAL_MANDO_POWER.data, SIGNAL_MANDO_POWER.length, RELOJ);
         }
-        else if(POSX>=20 && POSX<=110 && POSY>=70 && POSY<=160)
+        else if (POSX >= 20 && POSX <= 110 && POSY >= 70 && POSY <= 160)
+        {
             UARTprintf("Has pulsado TVE\n\n");
-        else if(POSX>=140 && POSX<=230 && POSY>=70 && POSY<=160)
+            ir_send_raw(SIGNAL_MANDO_LA1.data, SIGNAL_MANDO_LA1.length, RELOJ);
+        }
+
+        else if (POSX >= 140 && POSX <= 230 && POSY >= 70 && POSY <= 160)
+        {
             UARTprintf("Has pulsado La 2\n\n");
-        else if(POSX>=260 && POSX<=350 && POSY>=70 && POSY<=160)
+            ir_send_raw(SIGNAL_MANDO_LA2.data, SIGNAL_MANDO_LA2.length, RELOJ);
+        }
+        else if (POSX >= 260 && POSX <= 350 && POSY >= 70 && POSY <= 160)
+        {
             UARTprintf("Has pulsado Antena 3\n\n");
-        else if(POSX>=20 && POSX<=110 && POSY>=170 && POSY<=260)
+            ir_send_raw(SIGNAL_MANDO_ANTENA3.data, SIGNAL_MANDO_ANTENA3.length, RELOJ);
+        }
+        else if (POSX >= 20 && POSX <= 110 && POSY >= 170 && POSY <= 260)
+        {
             UARTprintf("Has pulsado Cuatro\n\n");
-        else if(POSX>=140 && POSX<=230 && POSY>=170 && POSY<=260)
+            ir_send_raw(SIGNAL_MANDO_LA4.data, SIGNAL_MANDO_LA4.length, RELOJ);
+        }
+        else if (POSX >= 140 && POSX <= 230 && POSY >= 170 && POSY <= 260)
+        {
             UARTprintf("Has pulsado Telecinco\n\n");
-        else if(POSX>=260 && POSX<=350 && POSY>=170 && POSY<=260)
+            ir_send_raw(SIGNAL_MANDO_TELECINCO.data, SIGNAL_MANDO_TELECINCO.length, RELOJ);
+        }
+        else if (POSX >= 260 && POSX <= 350 && POSY >= 170 && POSY <= 260)
+        {
             UARTprintf("Has pulsado La Sexta\n\n");
-        else if(POSX>=400 && POSX<=454 && POSY>=30 && POSY<=84)
+            ir_send_raw(SIGNAL_MANDO_LASEXTA.data, SIGNAL_MANDO_LASEXTA.length, RELOJ);
+        }
+        else if (POSX >= 400 && POSX <= 454 && POSY >= 30 && POSY <= 84)
+        {
             UARTprintf("Has pulsado el boton de subir volumen\n\n");
-        else if(POSX>=400 && POSX<=454 && POSY>=110 && POSY<=164)
+            ir_send_raw(SIGNAL_MANDO_VOLUP.data, SIGNAL_MANDO_VOLUP.length, RELOJ);
+        }
+        else if (POSX >= 400 && POSX <= 454 && POSY >= 110 && POSY <= 164)
+        {
             UARTprintf("Has pulsado el boton de bajar volumen\n\n");
-        else if(POSX>=400 && POSX<=454 && POSY>=190 && POSY<=244)
+            ir_send_raw(SIGNAL_MANDO_VOLDOWN.data, SIGNAL_MANDO_VOLDOWN.length,
+                        RELOJ);
+        }
+        else if (POSX >= 400 && POSX <= 454 && POSY >= 190 && POSY <= 244)
+        {
             UARTprintf("Has pulsado el boton de quitar volumen\n\n");
+            ir_send_raw(SIGNAL_MANDO_MUTE.data, SIGNAL_MANDO_MUTE.length,RELOJ);}
     }
 
 }
