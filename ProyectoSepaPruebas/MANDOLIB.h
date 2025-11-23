@@ -44,7 +44,7 @@
 #define IMG_SIZE2   5832     // Tama�o del archivo .binh (en bytes)
 
 
-void FT800_LoadAndInflateImage(const uint8_t *data, size_t imgSize, uint32_t destAddr);
+void FT800_LoadImage(const uint8_t *data, size_t imgSize, uint32_t destAddr);
 void FT800_ShowBitmapSimple( const uint32_t addrs[],const uint16_t widths[],const uint16_t heights[],
                              const uint16_t strides[], uint8_t formats, const uint16_t xs[],
                             const uint16_t ys[], size_t count);

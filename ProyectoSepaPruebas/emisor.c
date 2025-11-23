@@ -118,7 +118,12 @@ int main(void)
     IntEnable(INT_TIMER0A); //Habilitar las interrupciones globales de los timers
     TimerIntEnable(TIMER0_BASE, TIMER_TIMA_TIMEOUT);    // Habilitar las interrupciones de timeout
     IntMasterEnable();  //Habilitacion global de interrupciones
-    TimerEnable(TIMER0_BASE, TIMER_A);  //Habilitar Timer0, 1, 2A y 2B
+    TimerEnable(TIMER0_BASE, TIMER_A);  //Habilitar Timer0
+
+    // Timer 2
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
+    TimerClockSourceSet(TIMER2_BASE, TIMER_CLOCK_SYSTEM);
+    TimerConfigure(TIMER2_BASE, TIMER_CFG_ONE_SHOT);
 
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_GPIOJ);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_TIMER0);
@@ -180,9 +185,29 @@ int main(void)
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Delay en microsegundos (SysCtlDelay tarda 3 ciclos por iteración)
-static inline void delay_us(uint32_t us)
+//static inline void delay_us(uint32_t us)
+//{
+//    SysCtlDelay((RELOJ / 3000000) * us);
+//}
+// Delay en microsegundos (Timer 2)
+static inline void delay_us(uint32_t us, int reloj)
 {
-    SysCtlDelay((RELOJ / 3000000) * us);
+    // Timer a 120 MHz -> 120 ticks = 1 microsegundo
+    uint32_t ticks = (reloj / 1000000) * us;
+
+    TimerLoadSet(TIMER2_BASE, TIMER_A, ticks - 1);
+
+    // Limpia bandera por si acaso
+    TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+
+    // Arranca el temporizador
+    TimerEnable(TIMER2_BASE, TIMER_A);
+
+    // Espera activa a que finalice
+    while(!(TimerIntStatus(TIMER2_BASE, false) & TIMER_TIMA_TIMEOUT));
+
+    // Limpia bandera de finalización
+    TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
 }
 
 // Enviar señal (raw: señal medida en duraciones MARK/SPACE directamente)

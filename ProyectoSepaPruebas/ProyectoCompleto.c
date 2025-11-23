@@ -80,7 +80,7 @@ int main(void)
     PWMOutputState(PWM0_BASE, PWM_OUT_7_BIT, false); //Habilita la salida 7 (apagada)
 
 
-    //TIMER
+    //TIMER 0
     SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);       //Habilita T0
     TimerClockSourceSet(TIMER0_BASE, TIMER_CLOCK_SYSTEM);   //T0 a 120MHz
     TimerConfigure(TIMER0_BASE, TIMER_CFG_PERIODIC);    //T0 periodico y conjunto (32b)
@@ -93,6 +93,16 @@ int main(void)
 
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_TIMER0);
     SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_PWM0);
+
+    // Timer 2
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER2);
+    TimerClockSourceSet(TIMER2_BASE, TIMER_CLOCK_SYSTEM);
+    TimerConfigure(TIMER2_BASE, TIMER_CFG_ONE_SHOT);
+
+    SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_GPIOJ);
+    SysCtlPeripheralSleepEnable(SYSCTL_PERIPH_TIMER0);
+
+    SysCtlPeripheralClockGating(true);
 
     // Note: Keep SPI below 11MHz here
     HAL_Init_SPI(1, RELOJ);  //Boosterpack a usar, Velocidad del MC

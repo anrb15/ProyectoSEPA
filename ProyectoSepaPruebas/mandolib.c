@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+#include "driverlib2.h"
 #include "inc/tm4c1294ncpdt.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_pwm.h"
@@ -19,6 +19,7 @@
 #include "driverlib/sysctl.h"
 #include "driverlib/gpio.h"
 #include "driverlib/pwm.h"
+#include "driverlib/timer.h"
 #include "utils/uartstdio.h"
 
 #include "FT800_TIVA.h"
@@ -26,8 +27,9 @@
 #include "signals.h"
 #include "MANDOLIB.h"
 
+uint32_t last_addr;
 
-void FT800_LoadAndInflateImage(const uint8_t *data, size_t imgSize, uint32_t destAddr)
+void FT800_LoadImage(const uint8_t *data, size_t imgSize, uint32_t destAddr)
 {
     ComEsperaFin();
     HAL_SPI_CSLow();
@@ -91,8 +93,8 @@ void FT800_ShowBitmapSimple( const uint32_t addrs[],const uint16_t widths[],cons
     ComEsperaFin();
 }
 
-
-//Funcion que muestra la intefarza del mando
+//
+////Funcion que muestra la intefarza del mando
 void InterfazMando(void)
 {
     //Direcciones de memoria donde se empieza a grabar cada imagen
@@ -107,16 +109,18 @@ void InterfazMando(void)
     uint32_t addr9 = addr8 + ((IMG_SIZE2 + 3) & ~3U);
     uint32_t addr10 = addr9 + ((IMG_SIZE2 + 3) & ~3U);
 
-    FT800_LoadAndInflateImage(tve_rgb565_data, IMG_SIZE, addr1); //Carga logo tve
-    FT800_LoadAndInflateImage(la2_rgb565_data, IMG_SIZE, addr2); //Carga logo la2
-    FT800_LoadAndInflateImage(antena3_rgb565_data, IMG_SIZE, addr3); //Carga logo antena3
-    FT800_LoadAndInflateImage(cuatro_rgb565_data, IMG_SIZE, addr4); //Carga logo cuatro
-    FT800_LoadAndInflateImage(telecinco_rgb565_data, IMG_SIZE, addr5); //Carga logo telecinco
-    FT800_LoadAndInflateImage(lasexta_rgb565_data, IMG_SIZE, addr6); //Carga logo lasexta
-    FT800_LoadAndInflateImage(encender_rgb565_data, IMG_SIZE2, addr7); //Carga imagen boton encender/apagar
-    FT800_LoadAndInflateImage(subir_rgb565_data, IMG_SIZE2, addr8); //Carga imagen boton subir volumen
-    FT800_LoadAndInflateImage(bajar_rgb565_data, IMG_SIZE2, addr9); //Carga imagen boton bajar volumen
-    FT800_LoadAndInflateImage(quitar_rgb565_data, IMG_SIZE2, addr10); //Carga imagen quitar el volumen
+    last_addr=addr10 + ((IMG_SIZE2 + 3) & ~3U);
+
+    FT800_LoadImage(tve_rgb565_data, IMG_SIZE, addr1); //Carga logo tve
+    FT800_LoadImage(la2_rgb565_data, IMG_SIZE, addr2); //Carga logo la2
+    FT800_LoadImage(antena3_rgb565_data, IMG_SIZE, addr3); //Carga logo antena3
+    FT800_LoadImage(cuatro_rgb565_data, IMG_SIZE, addr4); //Carga logo cuatro
+    FT800_LoadImage(telecinco_rgb565_data, IMG_SIZE, addr5); //Carga logo telecinco
+    FT800_LoadImage(lasexta_rgb565_data, IMG_SIZE, addr6); //Carga logo lasexta
+    FT800_LoadImage(encender_rgb565_data, IMG_SIZE2, addr7); //Carga imagen boton encender/apagar
+    FT800_LoadImage(subir_rgb565_data, IMG_SIZE2, addr8); //Carga imagen boton subir volumen
+    FT800_LoadImage(bajar_rgb565_data, IMG_SIZE2, addr9); //Carga imagen boton bajar volumen
+    FT800_LoadImage(quitar_rgb565_data, IMG_SIZE2, addr10); //Carga imagen quitar el volumen
 
     // Arrays de posiciones y tamaños
     uint32_t addrs[] = { addr1, addr2, addr3, addr4, addr5, addr6, addr7, addr8, addr9, addr10 };
@@ -131,6 +135,8 @@ void InterfazMando(void)
 
 }
 
+
+
 // Encender/apagar la salida PWM (marca = portadora ON)
 static inline void IR_MARK(void)  { PWMOutputState(PWM0_BASE, PWM_OUT_7_BIT, true);  }
 static inline void IR_SPACE(void) { PWMOutputState(PWM0_BASE, PWM_OUT_7_BIT, false); }
@@ -138,7 +144,23 @@ static inline void IR_SPACE(void) { PWMOutputState(PWM0_BASE, PWM_OUT_7_BIT, fal
 // Delay en microsegundos (SysCtlDelay tarda 3 ciclos por iteración)
 static inline void delay_us(uint32_t us, int RELOJ)
 {
-    SysCtlDelay((RELOJ / 3000000) * us);
+    // Timer a 120 MHz -> 120 ticks = 1 microsegundo
+    uint32_t ticks = (RELOJ / 1000000) * us;
+
+    TimerLoadSet(TIMER2_BASE, TIMER_A, ticks - 1);
+
+    // Limpia bandera por si acaso
+    TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
+
+    // Arranca el temporizador
+    TimerEnable(TIMER2_BASE, TIMER_A);
+
+    // Espera activa a que finalice
+    while (!(TimerIntStatus(TIMER2_BASE, false) & TIMER_TIMA_TIMEOUT))
+        ;
+
+    // Limpia bandera de finalizaci�n
+    TimerIntClear(TIMER2_BASE, TIMER_TIMA_TIMEOUT);
 }
 
 // Enviar señal (raw: señal medida en duraciones MARK/SPACE directamente)
