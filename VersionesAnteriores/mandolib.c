@@ -26,21 +26,36 @@
 #include "signals.h"
 #include "MANDOLIB.h"
 
+uint32_t last_addr;
 
-
-// Funcion para cargar imagenes en la memoria
-void FT800_LoadAndInflateImage(const uint8_t *data, size_t imgSize, uint32_t destAddr)
+void FT800_LoadImage(const uint8_t *data, size_t imgSize, uint32_t destAddr)
 {
     ComEsperaFin();
     HAL_SPI_CSLow();
 
     FT800_SPI_SendAddressWR(destAddr);
+
+    // Procesar en bloques de 2 bytes porque es RGB565
     size_t i;
-    for (i = 0; i < imgSize; i++)
-        HAL_SPI_ReadWrite(data[i]);
+    for (i = 0; i < imgSize; i += 2)
+    {
+        // Leer el pixel como 16 bits
+        uint16_t pixel = data[i] | (data[i + 1] << 8);
+
+        // Convertir RGB565 -> BGR565
+        uint16_t converted =
+            ((pixel & 0xF800) >> 11) |     // R -> B
+            ( pixel & 0x07E0 )        |    // G igual
+            ((pixel & 0x001F) << 11);     // B -> R
+
+        // Enviar pixel convertido, LSB primero (formato del FT800)
+        HAL_SPI_ReadWrite(converted & 0xFF);
+        HAL_SPI_ReadWrite(converted >> 8);
+    }
 
     HAL_SPI_CSHigh();
 }
+
 
 // Funcion para mostrar imagenes
 void FT800_ShowBitmapSimple( const uint32_t addrs[],const uint16_t widths[],const uint16_t heights[],
@@ -93,16 +108,18 @@ void InterfazMando(void)
     uint32_t addr9 = addr8 + ((IMG_SIZE2 + 3) & ~3U);
     uint32_t addr10 = addr9 + ((IMG_SIZE2 + 3) & ~3U);
 
-    FT800_LoadAndInflateImage(tve_rgb565_data, IMG_SIZE, addr1); //Carga logo tve
-    FT800_LoadAndInflateImage(la2_rgb565_data, IMG_SIZE, addr2); //Carga logo la2
-    FT800_LoadAndInflateImage(antena3_rgb565_data, IMG_SIZE, addr3); //Carga logo antena3
-    FT800_LoadAndInflateImage(cuatro_rgb565_data, IMG_SIZE, addr4); //Carga logo cuatro
-    FT800_LoadAndInflateImage(telecinco_rgb565_data, IMG_SIZE, addr5); //Carga logo telecinco
-    FT800_LoadAndInflateImage(lasexta_rgb565_data, IMG_SIZE, addr6); //Carga logo lasexta
-    FT800_LoadAndInflateImage(encender_rgb565_data, IMG_SIZE2, addr7); //Carga imagen boton encender/apagar
-    FT800_LoadAndInflateImage(subir_rgb565_data, IMG_SIZE2, addr8); //Carga imagen boton subir volumen
-    FT800_LoadAndInflateImage(bajar_rgb565_data, IMG_SIZE2, addr9); //Carga imagen boton bajar volumen
-    FT800_LoadAndInflateImage(quitar_rgb565_data, IMG_SIZE2, addr10); //Carga imagen quitar el volumen
+    last_addr=addr10 + ((IMG_SIZE2 + 3) & ~3U);
+
+    FT800_LoadImage(tve_rgb565_data, IMG_SIZE, addr1); //Carga logo tve
+    FT800_LoadImage(la2_rgb565_data, IMG_SIZE, addr2); //Carga logo la2
+    FT800_LoadImage(antena3_rgb565_data, IMG_SIZE, addr3); //Carga logo antena3
+    FT800_LoadImage(cuatro_rgb565_data, IMG_SIZE, addr4); //Carga logo cuatro
+    FT800_LoadImage(telecinco_rgb565_data, IMG_SIZE, addr5); //Carga logo telecinco
+    FT800_LoadImage(lasexta_rgb565_data, IMG_SIZE, addr6); //Carga logo lasexta
+    FT800_LoadImage(encender_rgb565_data, IMG_SIZE2, addr7); //Carga imagen boton encender/apagar
+    FT800_LoadImage(subir_rgb565_data, IMG_SIZE2, addr8); //Carga imagen boton subir volumen
+    FT800_LoadImage(bajar_rgb565_data, IMG_SIZE2, addr9); //Carga imagen boton bajar volumen
+    FT800_LoadImage(quitar_rgb565_data, IMG_SIZE2, addr10); //Carga imagen quitar el volumen
 
     // Arrays de posiciones y tamaños
     uint32_t addrs[] = { addr1, addr2, addr3, addr4, addr5, addr6, addr7, addr8, addr9, addr10 };

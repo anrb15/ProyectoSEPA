@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+#include "driverlib2.h"
 #include "inc/tm4c1294ncpdt.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_pwm.h"
@@ -92,8 +92,8 @@ void FT800_ShowBitmapSimple( const uint32_t addrs[],const uint16_t widths[],cons
     ComEsperaFin();
 }
 
-
-//Funcion que muestra la intefarza del mando
+//
+////Funcion que muestra la intefarza del mando
 void InterfazMando(void)
 {
     //Direcciones de memoria donde se empieza a grabar cada imagen
@@ -133,6 +133,8 @@ void InterfazMando(void)
     FT800_ShowBitmapSimple(addrs, widths, heights, strides, IMG_FORMAT, xs, ys, 10);
 
 }
+
+
 
 // Encender/apagar la salida PWM (marca = portadora ON)
 static inline void IR_MARK(void)  { PWMOutputState(PWM0_BASE, PWM_OUT_7_BIT, true);  }
