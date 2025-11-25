@@ -48,6 +48,7 @@ Los archivos están organizados por módulos:
 ### Cómo replicar el proyecto
 Para compilar y cargar el firmware:
 
+0. Configuración física del circuito de implementación del led IR y conexión de la pantalla VM800 con el altavoz activado mediante el jumper correspondiente. 
 1. Crear un proyecto en **Code Composer Studio** siguiendo la configuración indicada en las diapositivas de clase.
 2. Copiar **todos los archivos** de esta carpeta y pegarlos directamente en el proyecto recién creado, sobrescribiendo los que correspondan.
 3. Compilar y cargar el proyecto en la TIVA.
