@@ -12,7 +12,7 @@ Contiene los recursos técnicos utilizados como referencia para el desarrollo de
 - **Documentación FT800 (AN_252, AN_276, AN_303, AN_339, FT800 Programmers Guide)**: Conjunto de guías y notas de aplicación empleadas para comprender el funcionamiento del controlador gráfico FT800, así como los procesos de conversión de audio e imagen y el uso de formatos compatibles (incluyendo JPEG).
 
 ## MandoMicro y MandoReal
-Incluye las señales infrarrojas grabadas del mando original (MandoMicro) y del mando conseguido en el proyecto (MandoReal), junto con las conversiones a formato CSV para su posterior reproducción mediante el microcontrolador. Cada archivo corresponde a una función específica del mando.
+Incluye las señales infrarrojas grabadas del mando original (MandoReal) y del mando conseguido en el proyecto (MandoMicro), junto con las conversiones a formato CSV para su posterior reproducción mediante el microcontrolador. Cada archivo corresponde a una función específica del mando.
 
 ## ProyectoDefinitivo
 Incluye todos los archivos **.c** y **.h** desarrollados para la implementación final del proyecto en Code Composer Studio.  
